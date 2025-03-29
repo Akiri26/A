@@ -1,0 +1,58 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Collections;
+
+public class Try {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            // 读取学生组的数量
+            int n = scanner.nextInt();
+            // 用于记录每组人数为 1 - 4 的组的数量
+            int[] groupCount = new int[4];
+
+            // 统计每组人数的组的数量
+            for (int i = 0; i < n; i++) {
+                int groupSize = scanner.nextInt();
+                groupCount[groupSize - 1]++;
+            }
+
+            // 计算最少出租车数量
+            int taxiCount = 0;
+
+            // 4 人组每组单独一辆车
+            taxiCount += groupCount[3];
+
+            // 3 人组和 1 人组拼车
+            int pairedWithThree = Math.min(groupCount[2], groupCount[0]);
+            taxiCount += groupCount[2];
+            groupCount[0] -= pairedWithThree;
+
+            // 2 人组两两拼车
+            taxiCount += groupCount[1] / 2;
+            int remainingTwo = groupCount[1] % 2;
+
+            // 剩余的 2 人组和 1 人组拼车
+            if (remainingTwo > 0) {
+                if (groupCount[0] >= 2) {
+                    taxiCount++;
+                    groupCount[0] -= 2;
+                } else if (groupCount[0] == 1) {
+                    taxiCount++;
+                    groupCount[0]--;
+                } else {
+                    taxiCount++;
+                }
+            }
+
+            // 剩余的 1 人组拼车
+            taxiCount += groupCount[0] / 4;
+            if (groupCount[0] % 4 != 0) {
+                taxiCount++;
+            }
+
+            // 输出最少出租车数量
+            System.out.println(taxiCount);
+
+            scanner.close();
+        }
+}
