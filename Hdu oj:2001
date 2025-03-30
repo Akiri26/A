@@ -1,0 +1,18 @@
+import java.util.*;
+import java.text.DecimalFormat;
+public class Main{
+    public static void main(String[] args)
+    {
+        Scanner cin=new Scanner(System.in);
+        while(cin.hasNext())
+        {
+            double x1=cin.nextDouble();
+            double y1=cin.nextDouble();
+            double x2=cin.nextDouble();
+            double y2=cin.nextDouble();
+            double c=Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+            DecimalFormat df=new DecimalFormat("#0.00");
+            System.out.println(df.format(c));
+        }
+    }
+}
