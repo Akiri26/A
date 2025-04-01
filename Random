@@ -1,0 +1,31 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // 设置小数点后最多6位的格式
+        DecimalFormat df = new DecimalFormat("#.######");
+
+        System.out.println("请输入第一个实数a（-90 ≤ a ≤ 90）：");
+        double a = scanner.nextDouble();
+        while (a < -90 || a > 90) {
+            System.out.println("输入超出范围，请重新输入a（-90 ≤ a ≤ 90）：");
+            a = scanner.nextDouble();
+        }
+
+        System.out.println("请输入第二个实数b（-180 ≤ b ≤ 180）：");
+        double b = scanner.nextDouble();
+        while (b < -180 || b > 180) {
+            System.out.println("输入超出范围，请重新输入b（-180 ≤ b ≤ 180）：");
+            b = scanner.nextDouble();
+        }
+
+        // 格式化输出，去除不必要的尾随零
+        System.out.println("输出结果：");
+        System.out.println(df.format(a) + " " + df.format(b));
+
+        scanner.close();
+    }
+}
